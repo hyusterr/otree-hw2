@@ -1,0 +1,77 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    第{{ subsession.round_number }}回合
+{% endblock %}
+
+{% block global_styles  %}
+<style>
+    body {
+        text-align: center;
+    }
+    #speak-button {
+        font-size: 30px;
+        margin: 30px;
+    }
+    .hidden-area {
+        display: none;
+    }
+    .speech-area {
+        margin: auto;
+        padding: 8px;
+        text-align: center;
+        border: 4px solid black;
+        width: 280px;
+        height: auto;
+        font-size: 40px;
+        display: none;
+    }
+
+    .template-area {  /*「範例」會使用到的文字，預設不顯示*/
+        display: none;
+    }
+    .formfields-area {
+    }
+    .debug-info {
+        /*display: none;*/
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="template-area">
+        <p>在進入正式的回合之前，我們先給您一個例子。</p>
+    </div>
+    <div>
+        <div>
+            <p>接下來的選項裡，你將要從以下兩者間做出抉擇：</p>
+            <p><b>{{ player.sooner_period }}</b> 獲得{{ Constants.gainedamount_sooner }}枚法幣</p>
+            <p>或是在 <b>{{ player.waiting_period }}</b>星期後 獲得超過100枚法幣</p>
+        </div>
+        <div class="template-area">
+            <p></p>
+            <p>（註：實際的回合中，不一定會是{{ player.waiting_period }}星期，也可能是別的星期數，例如 1 星期後或 4 星期後。在此我們僅以{{ player.waiting_period }}星期為例。）</p>
+            <p>在正式實驗中，電腦將會要求您選擇「轉換點」。</p>
+        </div>
+        <div class="formfields-area">
+            {% formfield player.switch_point %}
+        </div>
+
+        <div class="nextbutton-area">
+            {% next_button %}
+        </div>
+    </div>
+
+    <div class="hidden-area">
+        {% formfield player.sooner_period %}
+        {% formfield player.waiting_period %}
+        {% formfield player.treatment_method %}
+    </div>
+
+{% endblock %}
+
+
+{% block global_scripts %}
+
+{% endblock %}
