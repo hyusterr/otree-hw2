@@ -34,7 +34,7 @@ class Questionnaire(Page):
         # 設定每一 round 的參數，並寫入 db
         idx = self.round_number - 1 # list 從0開始 但 round_bnumber 從1開始
         """ 步驟三：取得該回合的等待週數、存進player的waiting_period中"""
-        waiting_period = int(params[idx] / 10)
+        self.player.waiting_period = int(params[idx] / 10)
         sooner_period = int(params[idx] % 10)
         
         if sooner_period == 0:
