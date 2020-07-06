@@ -32,9 +32,9 @@ USE_POINTS = True
 ROOMS = [
     dict(
         name='otreeHW2',
-        display_name='',  """請填寫自己的名字"""
-        participant_label_file='',  """請填寫正確路徑"""
-    ),
+        display_name='YU-SHIANG HUANG', #,  """請填寫自己的名字"""
+        participant_label_file='./_rooms/otreeHW2.txt' # ,  """請填寫正確路徑"""
+    )
 ]
 
 ADMIN_USERNAME = 'admin'

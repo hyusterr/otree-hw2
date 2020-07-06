@@ -17,7 +17,7 @@ doc = """
 複製實驗——未來式：問卷主體
 """
 class WaitingPeriod(object):
-    list = [10, 20, 40, 80, 54, 64, 84, 124]
+    wlist = [10, 20, 40, 80, 54, 64, 84, 124]
 
 class GainedAmount(object):
     today = 100
@@ -29,7 +29,8 @@ class Treatment(object):
         # lazy loading: 若不存在就決定並起來，若已存在就直接取出
         if Constants.key_method not in participant.vars:
             """ 步驟四：將control跟treatmentWill隨機選擇，存進participant.vars中"""
-
+            participant.vars[ Constants.key_method ] = random.choice( ['control', 'treatmentWill'] )
+        # print( participant.vars[ Constants.key_method ] )
         method = participant.vars[Constants.key_method]
         return method
 
@@ -53,7 +54,7 @@ class OptionOfGetMoney(object):
             return part1, part2 + part3
         elif player.treatment_method == "treatmentWill":
             """ 步驟五：判斷結果為實驗組時，應回傳的內容"""
-            return
+            return  part1, part2 + Treatment.futureTense + part3
 
 class Subsession(BaseSubsession):
     def creating_session(self):
@@ -78,17 +79,15 @@ class Player(BasePlayer):
     def switch_point_choices(self):
         options_part1, options_part2 = OptionOfGetMoney.formatted_option(self, OptionOfGetMoney.part1, OptionOfGetMoney.part2, OptionOfGetMoney.part3)
         """ 步驟六：將結果組合成完整的句子（放入該回合等待的週數）"""
-        options =
-        
+        options =  options_part1 + str( self.waiting_period ) + options_part2        
         """ 步驟七：回傳選項，應以選項1-9儲存於data，而非完整之選項敘述"""
-        return [
-
-
-
-
-
-
-
-
-
+        return [ [1, options + '110'],
+                 [2, options + '120'],
+                 [3, options + '130'],
+                 [4, options + '140'],
+                 [5, options + '150'],
+                 [6, options + '160'],
+                 [7, options + '170'],
+                 [8, options + '180'],
+                 [9, options + '190'],
         ]
